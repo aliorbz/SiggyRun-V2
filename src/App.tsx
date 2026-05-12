@@ -454,13 +454,13 @@ const App: React.FC = () => {
   if (appState === 'LANDING') {
     return (
       <div className="flex flex-col items-center min-h-screen p-4 bg-[#051611] text-[#76e891] animate-in fade-in duration-1000">
-        <div className="flex-1 flex flex-col items-center justify-center max-w-3xl w-full text-center space-y-8 sm:space-y-12">
+        <div className="flex-1 flex flex-col items-center justify-center max-w-3xl w-full text-center space-y-6 sm:space-y-12">
           <div className="relative inline-block px-4">
             <h1 className="text-6xl sm:text-8xl md:text-[8rem] mb-4 tracking-tighter drop-shadow-[0_0_25px_#76e891] select-none animate-pulse font-bold leading-none">{GAME_NAME}</h1>
             <div className="absolute -top-6 sm:-top-10 -right-2 sm:-right-10 text-2xl sm:text-4xl opacity-40 rotate-12">✨</div>
             <div className="absolute -bottom-6 sm:-bottom-10 -left-2 sm:-left-10 text-2xl sm:text-4xl opacity-40 -rotate-12">🌙</div>
           </div>
-          <p className="text-xl sm:text-2xl text-green-200 opacity-80 leading-relaxed italic max-w-xl mx-auto">A familiar awakens... <br/>The cosmic circle calls for your agility. <br/>Will you complete the ritual?</p>
+          <p className="text-xl sm:text-2xl text-green-200 opacity-80 leading-relaxed italic max-w-xl mx-auto px-4">A familiar awakens... <br className="hidden sm:block"/>The cosmic circle calls for your agility. <br className="hidden sm:block"/>Will you complete the ritual?</p>
           <button onClick={() => setAppState('GAME')} className="group relative inline-block px-8 sm:px-12 py-3 sm:py-5 text-xl sm:text-3xl border-4 border-[#226b48] bg-black hover:bg-[#226b48] hover:text-white transition-all cursor-pointer rounded-2xl shadow-[0_0_20px_rgba(34,107,72,0.6)] active:scale-95"><span className="relative z-10 uppercase tracking-widest font-bold">Invoke Magic</span></button>
         </div>
         <div className="w-full">
@@ -477,7 +477,7 @@ const App: React.FC = () => {
         {!isConnected ? (
           <button 
             onClick={() => connect({ connector: connectors[0] })}
-            className="flex items-center gap-2 px-4 py-2 bg-black border-2 border-[#226b48] text-[#76e891] rounded-xl hover:bg-[#226b48] hover:text-white transition-all text-sm font-bold shadow-[0_0_15px_rgba(34,107,72,0.2)] active:scale-95"
+            className="flex items-center gap-2 px-4 py-2 bg-black border-2 border-[#226b48] text-[#76e891] rounded-xl hover:bg-[#226b48] hover:text-white transition-all text-lg font-bold shadow-[0_0_15px_rgba(34,107,72,0.2)] active:scale-95"
           >
             <Wallet size={16} />
             <span>Connect Wallet</span>
@@ -535,7 +535,7 @@ const App: React.FC = () => {
       </button>
 
       {/* HEADER SECTION - SIGGY RUN TITLE AT TOP */}
-      <header className="w-full max-w-[850px] text-center mb-8 sm:mb-10 animate-in fade-in duration-1000">
+      <header className="w-full max-w-[850px] text-center mb-6 sm:mb-10 animate-in fade-in duration-1000">
         <h1 className="text-5xl sm:text-8xl text-[#76e891] tracking-[0.1em] drop-shadow-[0_0_20px_rgba(118,232,145,0.6)] animate-pulse font-bold leading-none select-none">
           {GAME_NAME}
         </h1>
@@ -576,7 +576,7 @@ const App: React.FC = () => {
                         e.stopPropagation();
                         handleInput(e);
                       }}
-                      className={`px-8 sm:px-12 py-2 sm:py-4 border-4 border-[#226b48] bg-black hover:bg-[#226b48] hover:text-white transition-all cursor-pointer rounded-xl text-lg sm:text-2xl font-bold tracking-widest uppercase shadow-[0_4px_0_#0b2d20] active:translate-y-1 active:shadow-none flex items-center gap-3 ${isTxSending || isTxConfirming ? 'opacity-70 pointer-events-none' : ''}`}
+                      className={`px-8 sm:px-12 py-2 sm:py-4 border-4 border-[#226b48] bg-black hover:bg-[#226b48] hover:text-white transition-all cursor-pointer rounded-xl text-xl sm:text-2xl font-bold tracking-widest uppercase shadow-[0_4px_0_#0b2d20] active:translate-y-1 active:shadow-none flex items-center gap-3 ${isTxSending || isTxConfirming ? 'opacity-70 pointer-events-none' : ''}`}
                     >
                       {(isTxSending || isTxConfirming) && <Loader2 size={24} className="animate-spin" />}
                       {!isConnected ? 'Connect Wallet' : (!isCorrectChain ? 'Switch Network' : (!isPaid ? `Offer ${ENTRY_FEE} RITUAL` : 'Preparing Ritual...'))}
@@ -617,7 +617,7 @@ const App: React.FC = () => {
                       e.stopPropagation();
                       handleInput(e);
                     }}
-                    className={`px-4 mt-2 sm:mt-4 sm:px-8 py-2 sm:py-3 border-4 border-[#76e891] bg-black hover:bg-[#76e891] hover:text-black transition-all cursor-pointer rounded-xl text-sm sm:text-xl font-bold tracking-widest uppercase shadow-[0_3px_0_#0b2d20] flex items-center gap-3 ${gameOverCooldown || isTxSending || isTxConfirming ? 'opacity-50 cursor-wait pointer-events-none' : 'animate-bounce active:translate-y-1 active:shadow-none'}`}
+                    className={`px-4 mt-2 sm:mt-4 sm:px-8 py-2 sm:py-3 border-4 border-[#76e891] bg-black hover:bg-[#76e891] hover:text-black transition-all cursor-pointer rounded-xl text-lg sm:text-xl font-bold tracking-widest uppercase shadow-[0_3px_0_#0b2d20] flex items-center gap-3 ${gameOverCooldown || isTxSending || isTxConfirming ? 'opacity-50 cursor-wait pointer-events-none' : 'animate-bounce active:translate-y-1 active:shadow-none'}`}
                   >
                     {(isTxSending || isTxConfirming) && <Loader2 size={20} className="animate-spin" />}
                     {gameOverCooldown ? 'Restoring...' : (isTxSending || isTxConfirming ? 'Offering...' : (!isPaid ? `Offer ${ENTRY_FEE} RITUAL` : 'Preparing...'))}
@@ -637,14 +637,14 @@ const App: React.FC = () => {
         <div className="flex items-center justify-center gap-4 py-4 border-y border-[#226b48]/30 bg-black/20 backdrop-blur-sm rounded-2xl group">
           <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent to-[#226b48]/50"></div>
           <div className="flex flex-col items-center">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-green-200/40 font-mono mb-1">Ritual Record</span>
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.4em] text-green-200/40 font-mono mb-1">Ritual Record</span>
             <div className="flex items-center gap-3">
               <span className="text-xl sm:text-3xl text-[#76e891] font-mono font-bold drop-shadow-[0_0_10px_rgba(118,232,145,0.4)] group-hover:drop-shadow-[0_0_15px_rgba(118,232,145,0.6)] transition-all duration-500">
                 {highScore}
               </span>
               <div className="w-2 h-2 rounded-full bg-[#76e891] animate-pulse shadow-[0_0_8px_#76e891]"></div>
             </div>
-            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] text-green-200/20 mt-1">Maximum Essence Contained</span>
+            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.2em] text-green-200/20 mt-1">Maximum Essence Contained</span>
           </div>
           <div className="h-[2px] flex-1 bg-gradient-to-l from-transparent to-[#226b48]/50"></div>
         </div>

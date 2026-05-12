@@ -1,12 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "VT323", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-ritual: "VT323", monospace;
+}
+
+:root {
+  font-family: "VT323", monospace;
 }
 
 body {
-  @apply bg-[#010409] overflow-x-hidden;
+  @apply bg-[#051611] overflow-x-hidden text-[#76e891];
+  font-family: "VT323", monospace;
+}
+
+canvas {
+  image-rendering: pixelated;
 }
 
 /* Technical grid background */
