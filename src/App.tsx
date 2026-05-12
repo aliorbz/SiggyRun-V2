@@ -113,6 +113,7 @@ const App: React.FC = () => {
       speed: INITIAL_SPEED,
       frame: 0,
       nextSpawn: 100,
+      score: 0,
       player: { x: 50, y: GROUND_Y - 35, width: 35, height: 35, type: 'PLAYER' },
       playerVelY: 0,
       isJumping: false,
@@ -165,6 +166,7 @@ const App: React.FC = () => {
     speed: INITIAL_SPEED,
     frame: 0,
     nextSpawn: 100,
+    score: 0,
     player: { x: 50, y: GROUND_Y - 35, width: 35, height: 35, type: 'PLAYER' } as Entity,
     playerVelY: 0,
     isJumping: false,
@@ -183,12 +185,15 @@ const App: React.FC = () => {
 
   const commitToLeaderboard = useCallback((finalScore: number) => {
     const roundedScore = Math.floor(finalScore);
-    if (roundedScore > highScore) {
-      setHighScore(roundedScore);
-      localStorage.setItem(highScoreKey, roundedScore.toString());
-      console.log(`New High Score Saved to ${highScoreKey}:`, roundedScore);
-    }
-  }, [highScore, highScoreKey]);
+    setHighScore(prev => {
+      if (roundedScore > prev) {
+        localStorage.setItem(highScoreKey, roundedScore.toString());
+        console.log(`New High Score Saved to ${highScoreKey}:`, roundedScore);
+        return roundedScore;
+      }
+      return prev;
+    });
+  }, [highScoreKey]);
 
   const createParticles = (x: number, y: number, color: string) => {
     for(let i=0; i<15; i++) {
@@ -223,12 +228,8 @@ const App: React.FC = () => {
       v.speed += SPEED_INCREMENT;
     }
 
-    let currentScore = 0;
-    setScore(prev => {
-      const added = v.speed * 0.015;
-      currentScore = prev + added;
-      return currentScore;
-    });
+    v.score += v.speed * 0.015;
+    setScore(v.score);
 
     // Jump Physics
     if (v.isJumping) {
@@ -305,7 +306,7 @@ const App: React.FC = () => {
         p.y + p.height - padY > o.y + padY
       ) {
         createParticles(p.x + p.width/2, p.y + p.height/2, COLORS.ELIXIR);
-        handleGameOver(currentScore);
+        handleGameOver(v.score);
         return false;
       }
 
